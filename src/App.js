@@ -1,63 +1,74 @@
-import React, {useState} from "react";
+import React,{useState} from "react";
 import NewsItems from "./components/NewsItems";
 import Header from "./components/header";
 import EgImage1 from "./assets/Image.jpg";
 import EgImage2 from "./assets/Image2.jpg"
+import EgImage3 from "./assets/Image3.jpg";
+import EgImage4 from "./assets/Image4.jpg"
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState();
+  const handleSubmit = () => {
+    setTodos([...todos, { id: newTodo}]);
+    setNewTodo("")
+  };
+  
+  const handleDeleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  
   const turtles = [
     {
-        name: "Leonardo",
-        nickName: "Leo",
-        weapon: "Katana",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/e/ed/Leonardo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
+      title: "Heading",
+      paraText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim consectetur sollicitudin. Suspendisse a sapien risus. Proin sed mauris non nunc commodo molestie id eu ipsum. Maecenas nisl lorem, laoreet eu iaculis non, pulvinar id nulla. In condimentum pharetra erat sed finibus. Nullam quis ullamcorper leo, sed sollicitudin nunc",
+      id: 0,
+      imgUrl: EgImage1
     },
     {
-        name: "Donatello",
-        nickName: "Don",
-        weapon: "Bo staff",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/5/5a/Donatello_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
+      title: "Heading",
+      paraText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim consectetur sollicitudin. Suspendisse a sapien risus. Proin sed mauris non nunc commodo molestie id eu ipsum. Maecenas nisl lorem, laoreet eu iaculis non, pulvinar id nulla. In condimentum pharetra erat sed finibus. Nullam quis ullamcorper leo, sed sollicitudin nunc",
+      id: 1,
+      imgUrl: EgImage2
     },
     {
-        name: "Michelangelo",
-        nickName: "Mikey",
-        weapon: "Nunchucks",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/f/f3/Michelangelo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
+      title: "Heading",
+      paraText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim consectetur sollicitudin. Suspendisse a sapien risus. Proin sed mauris non nunc commodo molestie id eu ipsum. Maecenas nisl lorem, laoreet eu iaculis non, pulvinar id nulla. In condimentum pharetra erat sed finibus. Nullam quis ullamcorper leo, sed sollicitudin nunc",
+      id: 2,
+      imgUrl: EgImage3
     },
     {
-        name: "Raphael",
-        nickName: "Raph",
-        weapon: "Sai",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/7/72/Raphael_%28Teenage_Mutant_Ninja_Tutles%29.jpg"
-    }
-]
+      title: "Heading",
+      paraText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim consectetur sollicitudin. Suspendisse a sapien risus. Proin sed mauris non nunc commodo molestie id eu ipsum. Maecenas nisl lorem, laoreet eu iaculis non, pulvinar id nulla. In condimentum pharetra erat sed finibus. Nullam quis ullamcorper leo, sed sollicitudin nunc",
+      id: 3,
+      imgUrl: EgImage4
+    },
+  ]
 
-const displayTurtles = turtles.map((turtle, index) => 
-        <div key={turtle.name + index}>
-           <NewsItems title={turtle.name} imageUrl={turtle.imgUrl} id={index}/>
-        </div>);
+  const displayTurtles = turtles.map((turtle, index) =>
+    <div key={turtle.name + index}>
+      <button value={turtle.id} onClick={(event) => {setNewTodo(event.target.value); handleSubmit() }}>Bookmark</button>
+      <NewsItems title={turtle.title} paraText={turtle.paraText} imageUrl={turtle.imgUrl} id={index} />
 
+    </div>);
+
+  const bookmarks = todos.map(( todo, index) =>
+      <div key={index}>
+        <button onClick={() => handleDeleteTodo(todo.id)}>Remove</button>
+
+        
+      </div>
+  );
   return (
-    
-  <div>
-    <script src="http://localhost:8097"></script>
-    <Header title="News" />
-    <NewsItems 
-    title="Heading" 
-    imageUrl={EgImage1} 
-    paraText="lLorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus arcu ligula, 
-    dapibus et imperdiet a, interdum ac velit. Aenean euismod elit augue, vel pretium ipsum 
-    aliquam vel. Curabitur molestie, odio nec ultricies ultricies, tellus magna faucibus elit,
-     sit amet scelerisque magna eros id felis. Pellentesque at est finibus," id="1" />
-      <NewsItems 
-    title="Heading" 
-    imageUrl={EgImage2} 
-    paraText="lLorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus arcu ligula, 
-    dapibus et imperdiet a, interdum ac velit. Aenean euismod elit augue, vel pretium ipsum 
-    aliquam vel. Curabitur molestie, odio nec ultricies ultricies, tellus magna faucibus elit,
-     sit amet scelerisque magna eros id felis. Pellentesque at est finibus," id="2" />
-    {displayTurtles}
-  </div>
+
+    <div>
+      <script src="http://localhost:8097"></script>
+      <Header title="News" />
+      {displayTurtles}
+      <h2>Bookmarks</h2>
+      {/* {bookmarks} */}
+    </div>
   );
 }
 
