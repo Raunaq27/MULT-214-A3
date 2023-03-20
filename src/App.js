@@ -48,7 +48,7 @@ function App() {
 
   const displayTurtles = turtles.map((turtle, index) =>
     <div key={turtle.name + index}>
-      <button value={turtle.id} onClick={(event) => {setNewTodo(event.target.value); handleSubmit() }}>Bookmark</button>
+      <button value={turtle.id} onClick={(event) => {setNewTodo(event.target.value); handleSubmit(); console.log(todos) }}>Bookmark</button>
       <NewsItems title={turtle.title} paraText={turtle.paraText} imageUrl={turtle.imgUrl} id={index} />
 
     </div>);
