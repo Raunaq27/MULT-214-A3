@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import NewsItems from "./components/NewsItems";
 import Header from "./components/header";
 import EgImage1 from "./assets/Image.jpg";
@@ -7,18 +7,25 @@ import EgImage3 from "./assets/Image3.jpg";
 import EgImage4 from "./assets/Image4.jpg"
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState();
-  const handleSubmit = () => {
-    setTodos([...todos, { id: newTodo}]);
-    setNewTodo("")
-  };
-  
+  // const [todos, setTodos] = useState([]);
+  // const handleSubmit = (newId) => {
+
+  //   setTodos([...todos, newId ]);
+  // };
+
+  // const handleDeleteTodo = (id) => {
+  //   setTodos(todos.filter((todo) => todo.id !== id));
+  // };
+
+  const [todos, setTodos] = useState([ ]);
+
+
   const handleDeleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  
+
+
   const turtles = [
     {
       title: "Heading",
@@ -47,19 +54,21 @@ function App() {
   ]
 
   const displayTurtles = turtles.map((turtle, index) =>
-    <div key={turtle.name + index}>
-      <button value={turtle.id} onClick={(event) => {setNewTodo(event.target.value); handleSubmit(); console.log(todos) }}>Bookmark</button>
+    <div key={turtle.id + index}>
+      <button value={turtle.id} onClick={() => { setTodos([...todos,index]); console.log(todos) }}>Bookmark</button>
       <NewsItems title={turtle.title} paraText={turtle.paraText} imageUrl={turtle.imgUrl} id={index} />
 
-    </div>);
-
-  const bookmarks = todos.map(( todo, index) =>
-      <div key={index}>
-        <button onClick={() => handleDeleteTodo(todo.id)}>Remove</button>
-
-        
-      </div>
+    </div>
   );
+
+
+  // const bookmarks = todos.map(( todo, index) =>
+  //     <div key={index}>
+  //       <button onClick={() => handleDeleteTodo(todo.id + 1)}>Remove</button>
+
+
+  //     </div>
+  // );
   return (
 
     <div>
