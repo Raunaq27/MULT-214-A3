@@ -7,21 +7,11 @@ import EgImage3 from "./assets/Image3.jpg";
 import EgImage4 from "./assets/Image4.jpg"
 
 function App() {
-  // const [todos, setTodos] = useState([]);
-  // const handleSubmit = (newId) => {
+  const [todos, setTodos] = useState(0);
+  const handleSubmit = (newId) => {
 
-  //   setTodos([...todos, newId ]);
-  // };
-
-  // const handleDeleteTodo = (id) => {
-  //   setTodos(todos.filter((todo) => todo.id !== id));
-  // };
-
-  const [todos, setTodos] = useState([ ]);
-
-
-  const handleDeleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos( newId );
+    console.log(todos)
   };
 
 
@@ -55,20 +45,18 @@ function App() {
 
   const displayTurtles = turtles.map((turtle, index) =>
     <div key={turtle.id + index}>
-      <button value={turtle.id} onClick={() => { setTodos([...todos,index]); console.log(todos) }}>Bookmark</button>
+      <button onClick={() => handleSubmit(turtle.id)}>Bookmark</button>
       <NewsItems title={turtle.title} paraText={turtle.paraText} imageUrl={turtle.imgUrl} id={index} />
 
     </div>
   );
 
 
-  // const bookmarks = todos.map(( todo, index) =>
-  //     <div key={index}>
-  //       <button onClick={() => handleDeleteTodo(todo.id + 1)}>Remove</button>
-
-
-  //     </div>
-  // );
+  const bookmarks =
+      <div>
+        <NewsItems title={turtles[todos].title} paraText={turtles[todos].paraText} imageUrl={turtles[todos].imgUrl} />
+      </div>
+  ;
   return (
 
     <div>
@@ -76,7 +64,7 @@ function App() {
       <Header title="News" />
       {displayTurtles}
       <h2>Bookmarks</h2>
-      {/* {bookmarks} */}
+      {bookmarks}
     </div>
   );
 }
